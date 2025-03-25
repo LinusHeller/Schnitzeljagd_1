@@ -90,7 +90,12 @@
             { question: "Welches Gas atmen wir hauptsächlich ein?", answer: "Stickstoff" }
         ];
         
-        questions = questions.sort(() => Math.random() - 0.5); // Zufällige Reihenfolge mischen
+        // Fragen zufällig anordnen
+        questions = questions.sort(() => Math.random() - 0.5);
+        
+        // Konsolen-Log zur Überprüfung der Anzahl der Fragen
+        console.log(questions.length); // Dies gibt die Anzahl der Fragen aus (30)
+
         let currentQuestionIndex = 0;
 
         function loadQuestion() {
