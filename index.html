@@ -41,31 +41,65 @@
             margin-top: 10px;
             font-weight: bold;
         }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <h1>Schnitzeljagd</h1>
     <div class="quiz-container">
-        <p id="question">Wie viele Beine hat eine Spinne?</p>
+        <p id="question"></p>
         <input type="text" id="answer" placeholder="Deine Antwort...">
         <button onclick="checkAnswer()">Überprüfen</button>
         <p id="result" class="result"></p>
+        <button id="nextButton" class="hidden" onclick="nextQuestion()">Weiter</button>
     </div>
 
     <script>
-        function checkAnswer() {
-            var userAnswer = document.getElementById("answer").value.trim();
-            var correctAnswer = "8"; // Richtige Antwort
-            var resultText = document.getElementById("result");
+        const questions = [
+            { question: "Wie viele Beine hat eine Spinne?", answer: "8" },
+            { question: "Was ist die Hauptstadt von Frankreich?", answer: "Paris" },
+            { question: "Wie viele Planeten hat unser Sonnensystem?", answer: "8" },
+            { question: "Welches Element hat das chemische Symbol 'O'?", answer: "Sauerstoff" }
+        ];
 
-            if (userAnswer === correctAnswer) {
+        let currentQuestionIndex = 0;
+
+        function loadQuestion() {
+            document.getElementById("question").textContent = questions[currentQuestionIndex].question;
+            document.getElementById("answer").value = "";
+            document.getElementById("result").textContent = "";
+            document.getElementById("nextButton").classList.add("hidden");
+        }
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById("answer").value.trim();
+            const correctAnswer = questions[currentQuestionIndex].answer;
+            const resultText = document.getElementById("result");
+            const nextButton = document.getElementById("nextButton");
+
+            if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
                 resultText.textContent = "Richtig! Super gemacht!";
                 resultText.style.color = "green";
+                nextButton.classList.remove("hidden");
             } else {
                 resultText.textContent = "Falsch! Die richtige Antwort ist: " + correctAnswer;
                 resultText.style.color = "red";
+                nextButton.classList.remove("hidden");
             }
         }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                document.querySelector(".quiz-container").innerHTML = "<h2>Glückwunsch! Du hast das Quiz beendet.</h2>";
+            }
+        }
+
+        loadQuestion();
     </script>
 </body>
 </html>
