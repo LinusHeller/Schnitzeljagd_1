@@ -57,7 +57,7 @@
     </div>
 
     <script>
-        const questions = [
+        let questions = [
             { question: "Wie viele Beine hat eine Spinne?", answer: "8" },
             { question: "Was ist die Hauptstadt von Frankreich?", answer: "Paris" },
             { question: "Wie viele Planeten hat unser Sonnensystem?", answer: "8" },
@@ -89,7 +89,8 @@
             { question: "Welche Zahl ist die römische Zahl 'X'?", answer: "10" },
             { question: "Welches Gas atmen wir hauptsächlich ein?", answer: "Stickstoff" }
         ];
-
+        
+        questions = questions.sort(() => Math.random() - 0.5); // Zufällige Reihenfolge mischen
         let currentQuestionIndex = 0;
 
         function loadQuestion() {
