@@ -61,12 +61,19 @@
             { question: "Wie viele Stockwerke (mit Keller) hat das BBZW Sursee?", answer: "5" },
             { question: "Wie heisst die Turnhalle?", answer: "Kottenmatte" },
             { question: "Wie heisst das BBZW Sursee ausgeschrieben?", answer: "Berufsbildungszentrum Wirtschaft, Informatik und Technik Sursee" },
-            { question: "Wo befinden sich Autoparkplätze für die Schüler?", answer: "Vor der Schule" },
+            { question: "Wo befinden sich Autoparkplätze für die Schüler?", answer: "Vor dem Schulhaus" },
             { question: "Welches ist das beste Fach?", answer: "Pause" },
             { question: "Wo geht Herr Suter Mittagessen?", answer: "In der Mensa" }
         ];
 
         let currentQuestionIndex = 0;
+
+        function shuffleQuestions() {
+            for (let i = questions.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [questions[i], questions[j]] = [questions[j], questions[i]];
+            }
+        }
 
         function loadQuestion() {
             document.getElementById("question").textContent = questions[currentQuestionIndex].question;
@@ -111,6 +118,7 @@
             }
         }
 
+        shuffleQuestions();
         loadQuestion();
     </script>
 </body>
